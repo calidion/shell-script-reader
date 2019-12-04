@@ -37,17 +37,14 @@ export class ShellScriptReader {
     const size = fs.fstatSync(fd).size;
 
     if (size > MAX_ALLOWED_SIZE) {
-      // tslint:disable-next-line:no-console
       throw new Error("Exceeding max allowed file size 10M!");
     }
 
     const lines = fs.readFileSync(filename, "utf-8").split(/\r?\n/);
     const env: object = {};
 
-    // tslint:disable-next-line:only-arrow-functions
     lines.forEach((line) => {
       line = line.trim();
-      // tslint:disable-next-line:no-console
       const startWithExport = line.indexOf("export ") !== -1;
 
       if (startWithExport) {
