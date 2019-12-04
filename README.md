@@ -9,7 +9,7 @@ Shell Script Reader provides a way to read user customized shell script where a 
 
 So you can easily share your shell variables with your node.js scripts.
 
-Instead of using a central process.env, you can use your enviromental variable sets for each projects respectively. These way you will be eased by multiple projects and tests for various configurations.
+Instead of using a central process.env, you can use your enviromental variable sets for each projects respectively. These way you will be eased from multiple projects and tests for various configurations.
 
 And still you can easily interacting with shell vairaibles.
 
