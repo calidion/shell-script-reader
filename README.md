@@ -1,6 +1,7 @@
-[![Build Status](https://travis-ci.org/calidion/shell-script-reader.svg?branch=master)](https://travis-ci.org/calidion/shell-script-reader.svg?branch=master)
+[![Build Status](https://travis-ci.org/calidion/shell-script-reader.svg?branch=master)](https://travis-ci.org/calidion/shell-script-reader)
+
 [![Coverage Status](https://coveralls.io/repos/github/calidion/shell-script-reader/badge.svg?branch=master)](https://coveralls.io/github/calidion/shell-script-reader?branch=master)
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightblue.svg)](http://opensource.org/licenses/MIT)
 
 # Shell Script Reader
 
@@ -8,7 +9,9 @@ Shell Script Reader provides a way to read user customized shell script where a 
 
 So you can easily share your shell variables with your node.js scripts.
 
-Instead of using a central process.env, you can use your enviromental variables more respectively for each projects.
+Instead of using a central process.env, you can use your enviromental variable sets for each projects respectively. These way you will be eased by multiple projects and tests for various configurations.
+
+And still you can easily interacting with shell vairaibles.
 
 # Install
 
@@ -47,6 +50,7 @@ export
 # SHELL COMMENTS
 wget https://www.google.com
 ```
+> Only `^export ` stated lines are read.
 
 We will have an env object:
 
@@ -60,7 +64,7 @@ We will have an env object:
 
 ## Read process.env
 
-It provide access to process.env for convience sake.
+It provides access to process.env for convenience sake.
 
 ```ts
 const value = reader.getEnvRaw("KEY_NAME");
@@ -72,7 +76,7 @@ const value = reader.getEnvRaw("KEY_NAME");
 const value = reader.getEnv("KEY_NAME");
 ```
 
-For `./env` script will defined above:
+For `./env` script defined above:
 
 ```ts
 const value = reader.getEnv("AAA");
@@ -81,7 +85,7 @@ const value = reader.getEnv("BBB");
 // 'sosoisidoeod'
 ```
 
-If no key is provided, the whole object will be return:
+If no key is provided, the whole object will be returned:
 
 ```ts
 const value = reader.getEnv();

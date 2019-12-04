@@ -17,7 +17,6 @@ test('Should have ShellScriptReader available', () => {
   expect(reader.getEnv("AAA") === "111").toBeTruthy();
   expect(reader.getEnv("UN") === "").toBeTruthy();
   expect(Object.keys(reader.getEnv()).length === 5).toBeTruthy();
-  console.log(reader.getEnv());
 });
 
 

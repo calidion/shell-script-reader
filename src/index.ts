@@ -46,6 +46,7 @@ export class ShellScriptReader {
 
     // tslint:disable-next-line:only-arrow-functions
     lines.forEach((line) => {
+      line = line.trim();
       // tslint:disable-next-line:no-console
       const startWithExport = line.indexOf("export ") !== -1;
 
@@ -58,10 +59,12 @@ export class ShellScriptReader {
         if (index !== -1) {
           k = line.substr(7).substr(0, index);
           v = line.substr(7).substr(index + 1);
-        } else if (kv.length > 0) {
-          k = kv;
         } else {
-          return
+          k = kv;
+        }
+        // by pass `export =`
+        if (!k) {
+          return;
         }
         const descriptor = Object.getOwnPropertyDescriptor(env, k);
         if (!descriptor) {
