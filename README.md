@@ -50,7 +50,7 @@ export
 # SHELL COMMENTS
 wget https://www.google.com
 ```
-> Only `^export ` stated lines are read.
+> Only `^export ` started lines are read.
 
 We will have an env object:
 
