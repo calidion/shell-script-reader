@@ -5,13 +5,13 @@
 
 # Shell Script Reader
 
-Shell Script Reader provides a way to read user customized shell script where a lot of enviromental vairables are defined.
+Shell Script Reader provides a way to read user customized shell script where a lot of environmental variables are defined.
 
 So you can easily share your shell variables with your node.js scripts.
 
-Instead of using a central process.env, you can use your enviromental variable sets for each projects respectively. These way you will be eased from multiple projects and tests for various configurations.
+Instead of using a central process.env, you can use your environmental variable sets for each projects respectively. These way you will be eased from multiple projects and tests for various configurations.
 
-And still you can easily interacting with shell vairaibles.
+And still you can easily interacting with shell variables.
 
 # Install
 
