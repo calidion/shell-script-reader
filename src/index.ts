@@ -1,12 +1,14 @@
-import * as fs from "fs";
-
+import * as fs from 'fs';
 
 export const MAX_ALLOWED_SIZE = 10 * 1024 * 1024; // Max 10M
 
-export class ShellScriptReader {
+interface IKV {
+  [key: string]: string;
+}
 
+export class ShellScriptReader {
   private filename: string;
-  private env: object = new Object();
+  private env: IKV = {};
 
   private read: boolean = false;
 
@@ -31,28 +33,28 @@ export class ShellScriptReader {
       }
     }
     if (!fs.existsSync(filename)) {
-      throw new Error("File not Exist!");
+      throw new Error('File not Exist!');
     }
-    const fd = fs.openSync(filename, "r");
+    const fd = fs.openSync(filename, 'r');
     const size = fs.fstatSync(fd).size;
 
     if (size > MAX_ALLOWED_SIZE) {
-      throw new Error("Exceeding max allowed file size 10M!");
+      throw new Error('Exceeding max allowed file size 10M!');
     }
 
-    const lines = fs.readFileSync(filename, "utf-8").split(/\r?\n/);
-    const env: object = {};
+    const lines = fs.readFileSync(filename, 'utf-8').split(/\r?\n/);
+    const env: IKV = {};
 
-    lines.forEach((line) => {
+    lines.forEach(line => {
       line = line.trim();
-      const startWithExport = line.indexOf("export ") !== -1;
+      const startWithExport = line.indexOf('export ') !== -1;
 
       if (startWithExport) {
         let kv = line.substr(7);
         kv = kv.trim();
-        const index = kv.indexOf("=");
-        let k = "";
-        let v = "";
+        const index = kv.indexOf('=');
+        let k = '';
+        let v = '';
         if (index !== -1) {
           k = line.substr(7).substr(0, index);
           v = line.substr(7).substr(index + 1);
@@ -67,10 +69,11 @@ export class ShellScriptReader {
         if (!descriptor) {
           Object.defineProperty(env, k, {
             enumerable: true,
-            value: v
+            value: v,
+            writable: true,
           });
         } else {
-          descriptor.value = v;
+          env[k] = v;
         }
       }
     });
@@ -83,12 +86,11 @@ export class ShellScriptReader {
     return this.getObjectKeyValue(env, key);
   }
 
-  private getObjectKeyValue(o: object, key: string | undefined) {
+  private getObjectKeyValue(o: IKV, key: string | undefined) {
     if (key) {
       const descriptor = Object.getOwnPropertyDescriptor(o, key);
       return descriptor ? descriptor.value : undefined;
     }
     return o;
   }
-
 }

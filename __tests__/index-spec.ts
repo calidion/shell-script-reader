@@ -14,7 +14,7 @@ test('Should have ShellScriptReader available', () => {
   expect(reader.getEnv('SHELL_SCRIPT_READER') === undefined).toBeTruthy();
   expect(reader.getEnv('ENV') === 'E-SS OS').toBeTruthy();
   expect(reader.getEnv('AAA') === '111').toBeTruthy();
-  expect(reader.getEnv('UN') === '').toBeTruthy();
+  expect(reader.getEnv('UN') === 'aaasossos=aaa').toBeTruthy();
   expect(Object.keys(reader.getEnv()).length === 5).toBeTruthy();
 });
 
@@ -30,7 +30,7 @@ test('Should catch `File not Exist!` exception', () => {
   }
   expect(catched).toBeTruthy();
   const filename1 = path.resolve(__dirname, './env');
-  expect(reader.getEnv('UN', filename1) === '').toBeTruthy();
+  expect(reader.getEnv('UN', filename1) === 'aaasossos=aaa').toBeTruthy();
 });
 
 test('Should catch `Exceeding max allowed file size 10M!` exception', () => {
